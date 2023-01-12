@@ -1,15 +1,21 @@
+//User function Template for C++
+
 class Solution {
-  public:
-    long long countPairs(int n, int arr[], int k) {
+public:
+    int minimizeSum(int N, vector<int> arr) {
         // code here
-        vector<int> rems(k, 0);
-        for(int i=0;i<n;i++){
-            rems[arr[i]%k]++;
+        priority_queue<int, vector<int>, greater<int>> minHeap(arr.begin(), arr.end());
+        int totalSum = 0;
+        while(minHeap.size() > 1){
+            int x = minHeap.top();
+            minHeap.pop();
+            int y = minHeap.top();
+            minHeap.pop();
+            int sum = x + y;
+            totalSum += sum;
+            minHeap.push(sum);
         }
-        long long ans = 0;
-        for(int i=0;i<k;i++){
-            ans += (rems[i]*(rems[i]-1))/2;
-        }
-        return ans;
+        minHeap.pop();
+        return totalSum;
     }
 };

@@ -1,17 +1,19 @@
+//User function Template for Java
+
 class Solution {
-	static long countPairs(int n, int[] arr, int k) {
-		// code here
-		int[] rems = new int[k];
-	    for(int i=0;i<k;i++){
-	        rems[i] = 0;
-	    }
-	    for(int i=0;i<arr.length;i++){
-	        rems[arr[i]%k] = rems[arr[i]%k] + 1;
-	    }
-	    long ans = 0;
-	    for(int i=0;i<k;i++){
-	        ans += (rems[i]*(rems[i]-1))/2;
-	    }
-	    return ans;
-	}
+    long minimizeSum(int N, int arr[]) {
+        // code here
+        PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>();
+        for(int x : arr){
+            minHeap.add(x);
+        }
+        int totalSum = 0;
+        while(minHeap.size() > 1){
+            int x = minHeap.poll();
+            int y = minHeap.poll();
+            totalSum += x + y;
+            minHeap.add(x + y);
+        }
+        return totalSum;
+    }
 }
